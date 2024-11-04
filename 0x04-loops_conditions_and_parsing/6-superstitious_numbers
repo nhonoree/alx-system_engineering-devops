@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 20 with specific messages for certain numbers
+
+count=1  # Initialize a counter
+
+while [ $count -le 20 ]; do
+    case $count in
+        4)
+            echo "$count"  # Display the number 4
+            echo "bad luck from China"  # Display the corresponding message
+            ;;
+        9)
+            echo "$count"  # Display the number 9
+            echo "bad luck from Japan"  # Display the corresponding message
+            ;;
+        17)
+            echo "$count"  # Display the number 17
+            echo "bad luck from Italy"  # Display the corresponding message
+            ;;
+        *)
+            echo "$count"  # Display the number for all other cases
+            ;;
+    esac
+    count=$((count + 1))  # Increment the counter
+done
