@@ -1,13 +1,21 @@
 #!/usr/bin/env ruby
 
-# The regular expression to match "School"
-regex = /School/
+# Check if an argument is provided
+if ARGV.length != 1
+  puts "Usage: ruby 0-simply_match_school.rb <string>"
+  exit
+end
 
-# Get the argument from the command line
+# Get the input string from command line arguments
 input_string = ARGV[0]
 
-# Use the regex to find matches and print them
-matches = input_string.scan(regex).join
+# Define the regular expression for matching "School"
+regex = /School/
 
-# Print the matches followed by a newline
-puts matches
+# Check if the input string matches the regex and print the matches
+matches = input_string.scan(regex)
+if matches.any?
+  puts matches.join
+else
+  puts ""
+end
