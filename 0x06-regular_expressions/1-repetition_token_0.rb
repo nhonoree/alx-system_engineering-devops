@@ -9,8 +9,8 @@ end
 # Get the input string from command line arguments
 input_string = ARGV[0]
 
-# Define the regular expression for matching characters
-regex = /^(..)+$/
+# Define the regular expression to match a character repeated at least twice
+regex = /^(.)\1+$/
 
 # Check if the input string matches the regex
 if input_string.match?(regex)
