@@ -1,14 +1,15 @@
 #!/usr/bin/env ruby
 
-# Regular expression to match a character repeated at least twice
-regex = /^(.)\1+$/
+# Regular expression to match one or more occurrences of any character
+regex = /^.+$/
 
-# Get the input string from command line arguments
-input_string = ARGV[0]
+# Get the input from ARGV
+input = ARGV[0]
 
-# Check if the input string matches the regex
-if input_string.match?(regex)
+# Match the input with the regular expression
+if regex.match(input)
   puts "Match"
 else
   puts "No match"
 end
+
