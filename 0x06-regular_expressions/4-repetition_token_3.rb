@@ -1,17 +1,11 @@
 #!/usr/bin/env ruby
 
-# Check if the argument is passed
-if ARGV.length != 1
-  puts "Usage: ruby 4-repetition_token_3.rb <string>"
-  exit
-end
+# Regular expression to match "hbn" with 2 to 5 `b`s
+regex = /h{1}b{2,5}n/
 
-# Regular expression to match the specified patterns
-regex = /ab?|a(b{2,})/
-
-# Check if the input matches the regex
-if ARGV[0].match?(regex)
-  puts "Match"
+# Check if the input string matches the regex
+if ARGV[0] =~ regex
+  puts "hbn"
 else
-  puts "No match"
+  puts ""
 end

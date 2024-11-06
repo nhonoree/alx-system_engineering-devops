@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-# Regular expression to match strings with "a" followed by one or more "b's" followed by "a"
-regex = /ab+a/
+# Regular expression to match "hbn" with at least one `b` in between
+regex = /h+b+n/
 
 # Check if the input string matches the regex
 if ARGV[0] =~ regex
-  puts "Match"
+  puts "hbn"
 else
-  puts "No match"
+  puts ""
 end
