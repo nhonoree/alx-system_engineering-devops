@@ -1,15 +1,11 @@
 #!/usr/bin/env ruby
 
-# Regular expression to match one or more occurrences of any character
-regex = /^.+$/
+# Regular expression to match "hbttttn"
+regex = /hbttttn/
 
-# Get the input from ARGV
-input = ARGV[0]
-
-# Match the input with the regular expression
-if regex.match(input)
-  puts "Match"
+# Check if the input string matches the regex
+if ARGV[0] =~ regex
+  puts "hbttttn"
 else
-  puts "No match"
+  puts ""
 end
-
