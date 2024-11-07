@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Use ip command to show all active IPv4 addresses
+ip -4 addr show | grep -oP 'inet \K[\d.]+' | cat -e
