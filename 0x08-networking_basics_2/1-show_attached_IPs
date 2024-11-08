@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 # This script displays all active IPv4 IP addresses attached to the machine.
 
-# Use `ip` command to get all active IPv4 addresses and display them
-ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+# Check if `ip` command is available
+if command -v ip &> /dev/null; then
+    # Use `ip` command to show active IPv4 addresses
+    ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+else
+    echo "Error: 'ip' command not found. Please install iproute2."
+    exit 1
+fi
