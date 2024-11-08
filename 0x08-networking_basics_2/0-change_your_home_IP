@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
+# This script changes the IP address resolution for localhost and facebook.com.
 
-# This script changes the IP addresses that localhost and facebook.com resolve to
-
-# Backup /etc/hosts before modifying it (optional but recommended)
-sudo cp /etc/hosts /etc/hosts.bak
+# Backup the original /etc/hosts file before making changes
+cp /etc/hosts /etc/hosts.bak
 
 # Update localhost to resolve to 127.0.0.2
-sudo sed 's/127.0.0.1/127.0.0.2/' /etc/hosts | sudo tee /etc/hosts > /dev/null
+if grep -q "127.0.0.1" /etc/hosts; then
+  sed -i 's/127.0.0.1/127.0.0.2/g' /etc/hosts
+  echo "Updated localhost to 127.0.0.2"
+else
+  echo "localhost is already set to a custom IP"
+fi
 
 # Update facebook.com to resolve to 8.8.8.8
-sudo sed '/facebook.com/c\8.8.8.8 facebook.com' /etc/hosts | sudo tee /etc/hosts > /dev/null
+if grep -q "facebook.com" /etc/hosts; then
+  sed -i 's/157.240.11.35/8.8.8.8/g' /etc/hosts
+  echo "Updated facebook.com to 8.8.8.8"
+else
+  echo "facebook.com is already set to a custom IP"
+fi
+
+echo "IP addresses have been updated."
