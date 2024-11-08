@@ -1,2 +1,4 @@
-#!/bin/bash
-ss -tuln
+#!/usr/bin/env bash
+# This script displays all currently listening TCP and UDP ports
+
+netstat -lntup
