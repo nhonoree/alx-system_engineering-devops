@@ -1,0 +1,7 @@
+CHANGE MASTER TO 
+    MASTER_HOST='192.168.1.10',
+    MASTER_USER='replica_user',
+    MASTER_PASSWORD='replica_pass',
+    MASTER_LOG_FILE='mysql-bin.000001',
+    MASTER_LOG_POS=107;
+START SLAVE;
