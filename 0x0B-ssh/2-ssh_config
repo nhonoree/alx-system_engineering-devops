@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Generate RSA key pair with a 4096-bit size and a passphrase of 'betty'
+
+# Check if the file already exists to avoid overwriting
+if [ ! -f ~/.ssh/school ]; then
+    # Generate the RSA key pair with 4096 bits and passphrase 'betty'
+    ssh-keygen -t rsa -b 4096 -f ~/.ssh/school -N "betty"
+else
+    echo "The key already exists!"
+fi
