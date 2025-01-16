@@ -1,0 +1,3 @@
+service nginx restart
+echo "Hello ALX" > /var/www/html/index.html
+
