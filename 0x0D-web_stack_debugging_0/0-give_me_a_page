@@ -1,3 +1,5 @@
-service nginx restart
-echo "Hello ALX" > /var/www/html/index.html
+#!/usr/bin/env bash
 
+# Ensure Apache is installed
+apt-get update -y
+apt-get install -y apache2
