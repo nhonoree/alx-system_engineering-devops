@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Connecting to SMTP server on port 587..."
+{
+    echo "EHLO test.com"
+    echo "AUTH LOGIN"
+    echo "VXNlcm5hbWU6"  # Base64 for "Username:"
+    echo "UGFzc3dvcmQ6"  # Base64 for "Password:"
+    echo "QUIT"
+} | telnet smtp.gmail.com 587

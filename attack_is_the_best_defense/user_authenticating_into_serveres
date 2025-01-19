@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Simulating user authentication into a server..."
+echo -n "334 VXNlcm5hbWU6"   # Simulates Base64 prompt for username
+sleep 2
+echo -n "334 UGFzc3dvcmQ6"   # Simulates Base64 prompt for password
