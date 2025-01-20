@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Update package list and install HAproxy
+sudo apt-get update
+sudo apt-get install -y haproxy
+
+# Ensure the correct hostnames for the web servers
+hostnamectl set-hostname [STUDENT_ID]-web-01
+# Repeat for web-02 if necessary:
+# ssh user@web-02 'hostnamectl set-hostname [STUDENT_ID]-web-02'
+
+# Configure HAproxy to send traffic to web-01 and web-02
+echo "global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /var/lib/haproxy/stats
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log     global
+    option  httplog
+    option  dontlognull
+    timeout connect 5000ms
+    timeout client  50000ms
+    timeout server  50000ms
+
+frontend http_front
+    bind *:80
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server web-01 [WEB-01_IP]:80 check
+    server web-02 [WEB-02_IP]:80 check" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
+
+# Enable HAproxy service to start on boot
+sudo systemctl enable haproxy
+
+# Restart HAproxy to apply changes
+sudo systemctl restart haproxy
+
+# Verify HAproxy status
+sudo systemctl status haproxy
