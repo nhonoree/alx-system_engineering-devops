@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+service nginx stop
+pkill nginx
+rm -rf /var/run/nginx.pid
+service nginx start
