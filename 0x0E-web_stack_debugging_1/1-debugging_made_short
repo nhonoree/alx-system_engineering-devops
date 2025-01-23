@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-service nginx stop
-pkill nginx
-rm -rf /var/run/nginx.pid
-service nginx start
+#!/bin/bash
+service nginx status | grep -q "is not running" && service nginx start
+curl -s localhost:80 | grep -q "Welcome to nginx!" && exit 0
