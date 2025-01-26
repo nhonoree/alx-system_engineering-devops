@@ -1,33 +1,20 @@
-#!/usr/bin/env bash
-# This script ensures Nginx is running and correctly configured to return HTTP 200 on port 80.
+#!/bin/bash
+# Fix Nginx configuration to ensure it's listening on port 80
 
-# Update package lists and install Nginx if not installed
-apt update -y
-apt install -y nginx
-
-# Ensure Nginx is configured to listen on port 80 on all IPv4 addresses
-sed -i 's/listen 80 default_server;/listen 80 default_server;/' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80 default_server;//' /etc/nginx/sites-available/default
-
-# Restart Nginx to apply changes
-systemctl restart nginx
-
-# Verify that Nginx is running
-if ! systemctl is-active --quiet nginx; then
-  echo "Nginx failed to start."
-  exit 1
+# Check if Nginx is configured to listen on port 80
+if ! grep -q "listen 80;" /etc/nginx/sites-enabled/default; then
+    # Modify the configuration to listen on port 80 if not already done
+    sed -i 's/listen .*/listen 80;/' /etc/nginx/sites-enabled/default
 fi
 
-# Verify that port 80 is being listened on
-if ! ss -tuln | grep -q ':80'; then
-  echo "Port 80 is not being listened on."
-  exit 1
-fi
+# Restart Nginx to apply any changes
+service nginx restart
 
-# Test if Nginx returns HTTP 200 on port 80
-if curl -s -o /dev/null -w "%{http_code}" 0:80 | grep -q "200"; then
-  echo "Nginx is successfully serving HTTP 200 on port 80."
+# Check if Nginx is running and returning HTTP 200 on port 80
+if curl -sI http://127.0.0.1:80 | grep -q "200 OK"; then
+    # Return 2 if everything is correct
+    echo "2"
 else
-  echo "Nginx is not returning HTTP 200 on port 80."
-  exit 1
+    # Return 0 if something is wrong
+    echo "0"
 fi
