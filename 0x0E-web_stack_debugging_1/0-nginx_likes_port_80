@@ -11,7 +11,9 @@ fi
 service nginx restart
 
 # Check if Nginx is running and returning HTTP 200 on port 80
-if curl -sI http://127.0.0.1:80 | grep -q "200 OK"; then
+response=$(curl -sI http://127.0.0.1:80 | grep "HTTP/1.1 200 OK")
+
+if [[ -n "$response" ]]; then
     # Return 2 if everything is correct
     echo "2"
 else
