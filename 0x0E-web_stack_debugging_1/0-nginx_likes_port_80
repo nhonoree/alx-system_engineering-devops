@@ -7,6 +7,9 @@ if ! grep -q "listen 80;" /etc/nginx/sites-enabled/default; then
     sed -i 's/listen .*/listen 80;/' /etc/nginx/sites-enabled/default
 fi
 
+# Ensure there's an index.html page in the web root
+echo "<html><body><h1>Welcome to Nginx</h1></body></html>" > /var/www/html/index.html
+
 # Restart Nginx to apply any changes
 service nginx restart
 
