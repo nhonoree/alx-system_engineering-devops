@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# This script displays information about subdomains for a given domain.
+# Usage: ./0-world_wide_web domain [subdomain]
+
+# Function to get subdomain information
+get_subdomain_info() {
+    local domain=$1
+    local subdomain=$2
+
+    # Use dig to query the DNS records
+    local result=$(dig "${subdomain}.${domain}" +short)
+    if [ -n "$result" ]; then
+        echo "The subdomain ${subdomain} is a A record and points to ${result}"
+    else
+        echo "The subdomain ${subdomain} does not exist or has no A record."
+    fi
+}
+
+# Check if at least one argument (domain) is provided
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 domain [subdomain]"
+    exit 1
+fi
+
+# Extract parameters
+domain=$1
+subdomain=${2:-}
+
+# If no specific subdomain is provided, query all default subdomains
+if [ -z "$subdomain" ]; then
+    for sub in www lb-01 web-01 web-02; do
+        get_subdomain_info "$domain" "$sub"
+    done
+else
+    get_subdomain_info "$domain" "$subdomain"
+fi
