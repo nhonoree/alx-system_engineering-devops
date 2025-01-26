@@ -1,14 +1,11 @@
-#!/bin/bash
-# Fix Nginx configuration to ensure it's listening on port 80
+#!/usr/bin/env bash
+# Ensure Nginx is configured to listen on port 80 and is returning HTTP 200
 
 # Check if Nginx is configured to listen on port 80
 if ! grep -q "listen 80;" /etc/nginx/sites-enabled/default; then
     # Modify the configuration to listen on port 80 if not already done
     sed -i 's/listen .*/listen 80;/' /etc/nginx/sites-enabled/default
 fi
-
-# Ensure there's an index.html page in the web root
-echo "<html><body><h1>Welcome to Nginx</h1></body></html>" > /var/www/html/index.html
 
 # Restart Nginx to apply any changes
 service nginx restart
