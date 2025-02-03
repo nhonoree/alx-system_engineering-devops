@@ -1,0 +1,16 @@
+#!/bin/bash
+# 1-port_forwarding
+
+# Enable IP forwarding
+sudo sysctl -w net.ipv4.ip_forward=1
+
+# Set up port forwarding from port 8080 to port 80
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+
+# Save the iptables rules to persist after reboot
+sudo sh -c "iptables-save > /etc/iptables.rules"
+
+# Add a script to restore iptables rules on boot
+echo "#!/bin/bash" | sudo tee /etc/network/if-pre-up.d/iptables-restore
+echo "iptables-restore < /etc/iptables.rules" | sudo tee -a /etc/network/if-pre-up.d/iptables-restore
+sudo chmod +x /etc/network/if-pre-up.d/iptables-restore

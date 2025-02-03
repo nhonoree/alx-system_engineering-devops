@@ -1,0 +1,17 @@
+#!/bin/bash
+# 2-firewall_configuration
+
+# Allow traffic from a specific IP range (e.g., 192.168.1.0/24)
+sudo ufw allow from 192.168.1.0/24 to any port 22
+
+# Block traffic from a specific IP (e.g., 10.0.0.5)
+sudo ufw deny from 10.0.0.5 to any
+
+# Allow ICMP (ping) requests
+sudo ufw allow in proto icmp
+
+# Enable logging for UFW
+sudo ufw logging on
+
+# Reload UFW to apply changes
+sudo ufw reload

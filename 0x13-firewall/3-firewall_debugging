@@ -1,0 +1,17 @@
+#!/bin/bash
+# 3-firewall_debugging
+
+# Check UFW status
+sudo ufw status verbose
+
+# Check open ports using netstat
+sudo netstat -tuln
+
+# Check open ports using ss
+sudo ss -tuln
+
+# Test connectivity to a specific port (e.g., port 80)
+telnet localhost 80
+
+# Check iptables rules
+sudo iptables -L -v -n

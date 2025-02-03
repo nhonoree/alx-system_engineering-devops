@@ -1,0 +1,21 @@
+#!/bin/bash
+# 0-block_all_incoming_traffic_but
+
+# Install UFW if not already installed
+sudo apt update
+sudo apt install ufw -y
+
+# Allow SSH (Port 22)
+sudo ufw allow 22/tcp
+
+# Allow HTTP (Port 80)
+sudo ufw allow 80/tcp
+
+# Allow HTTPS (Port 443)
+sudo ufw allow 443/tcp
+
+# Enable UFW to block all other incoming traffic
+sudo ufw enable
+
+# Display UFW status to verify rules
+sudo ufw status verbose

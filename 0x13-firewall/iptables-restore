@@ -1,0 +1,5 @@
+#!/bin/bash
+# iptables-restore
+
+# Restore iptables rules
+iptables-restore < /etc/iptables.rules
