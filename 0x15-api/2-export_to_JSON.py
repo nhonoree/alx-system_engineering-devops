@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module to export an employee's TODO list progress to a JSON file using a REST API.
+Module to export employee TODO list progress to JSON using a REST API.
 """
 import json
 import requests
