@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module to export an employee's TODO list progress to a CSV file using a REST API.
+Module to export employee TODO list progress to CSV using a REST API.
 """
 import csv
 import requests
