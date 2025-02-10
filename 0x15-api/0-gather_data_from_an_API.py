@@ -1,14 +1,12 @@
 #!/usr/bin/python3
-"""
-Module to fetch and display an employee's TODO list progress using a REST API.
-"""
-import requests
+"""Fetch and display an employee's TODO list progress using a REST API."""
+
 import sys
+import requests
 
 
 def fetch_employee_data(employee_id):
-    """
-    Fetches employee data and their TODO list from the API.
+    """Fetch employee data and their TODO list from the API.
 
     Args:
         employee_id (int): The ID of the employee.
@@ -34,25 +32,9 @@ def fetch_employee_data(employee_id):
 
 
 def display_todo_progress(employee_name, todos):
-    """
-    Displays the employee's TODO list progress.
-
-    Args:
-        employee_name (str): The name of the employee.
-        todos (list): A list of tasks for the employee.
-    """
-    completed_tasks = [task for task in todos if task['completed']]
-    total_tasks = len(todos)
-    print(f"Employee {employee_name} is done with tasks({len(completed_tasks)}/{total_tasks}):")
+    """Display the employee's TODO list progress."""
+    completed_tasks = [task["title"] for task in todos if task["completed"]]
+    print(f"Employee {employee_name} is done with tasks "
+          f"({len(completed_tasks)}/{len(todos)}):")
     for task in completed_tasks:
-        print(f"\t {task['title']}")
-
-
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: ./0-gather_data_from_an_API.py <employee_id>")
-        sys.exit(1)
-
-    employee_id = int(sys.argv[1])
-    user_data, todos_data = fetch_employee_data(employee_id)
-    display_todo_progress(user_data['name'], todos_data)
+        print(f"\t {task}")
