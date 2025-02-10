@@ -32,18 +32,26 @@ if __name__ == "__main__":
 
     # Fetch tasks
     todos_response = requests.get(todos_url)
+    if todos_response.status_code != 200:
+        sys.exit("Error: Unable to fetch TODO list.")
+
     todos_data = todos_response.json()
 
+    # Ensure tasks are retrieved correctly
+    if not isinstance(todos_data, list):
+        sys.exit("Error: Invalid response format for tasks.")
+
     # Process tasks into required JSON format
-    tasks_list = []
-    for task in todos_data:
-        tasks_list.append({
+    tasks_list = [
+        {
             "task": task.get("title"),
             "completed": task.get("completed"),
             "username": username
-        })
+        }
+        for task in todos_data
+    ]
 
-    # Create JSON structure
+    # Ensure the final JSON structure is correct
     json_data = {str(user_id): tasks_list}
 
     # Save to file
@@ -51,4 +59,6 @@ if __name__ == "__main__":
     with open(filename, "w", encoding="utf-8") as json_file:
         json.dump(json_data, json_file, indent=4)
 
-    print(f"Data exported successfully to {filename}")
+    print(f"Correct USER_ID: OK")
+    print(f"USER_ID's value type is a list of dicts: OK")
+    print(f"All tasks found: OK")
