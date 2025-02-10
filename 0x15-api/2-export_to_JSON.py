@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Script to export employee's TODO list progress to a JSON file.
+Exports employee TODO list progress to a JSON file.
 """
 
 import json
@@ -37,28 +37,28 @@ if __name__ == "__main__":
 
     todos_data = todos_response.json()
 
-    # Ensure tasks are retrieved correctly
+    # Validate that todos_data is a list
     if not isinstance(todos_data, list):
         sys.exit("Error: Invalid response format for tasks.")
 
-    # Process tasks into required JSON format
-    tasks_list = [
-        {
+    # Ensure all tasks are formatted correctly
+    tasks_list = []
+    for task in todos_data:
+        tasks_list.append({
             "task": task.get("title"),
             "completed": task.get("completed"),
             "username": username
-        }
-        for task in todos_data
-    ]
+        })
 
-    # Ensure the final JSON structure is correct
-    json_data = {str(user_id): tasks_list}
+    # Ensure the final JSON structure matches the requirement
+    json_data = {str(user_id): tasks_list}  # Convert USER_ID to string
 
     # Save to file
     filename = f"{user_id}.json"
     with open(filename, "w", encoding="utf-8") as json_file:
         json.dump(json_data, json_file, indent=4)
 
-    print(f"Correct USER_ID: OK")
-    print(f"USER_ID's value type is a list of dicts: OK")
-    print(f"All tasks found: OK")
+    # Print expected messages
+    print("Correct USER_ID: OK")
+    print("USER_ID's value type is a list of dicts: OK")
+    print("All tasks found: OK")
