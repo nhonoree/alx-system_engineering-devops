@@ -43,7 +43,11 @@ def display_todo_progress(employee_name, todos):
     """
     completed_tasks = [task for task in todos if task['completed']]
     total_tasks = len(todos)
-    print(f"Employee {employee_name} is done with tasks({len(completed_tasks)}/{total_tasks}):")
+    progress_message = (
+        f"Employee {employee_name} is done with tasks"
+        f"({len(completed_tasks)}/{total_tasks}):"
+    )
+    print(progress_message)
     for task in completed_tasks:
         print(f"\t {task['title']}")
 
