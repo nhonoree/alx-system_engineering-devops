@@ -1,6 +1,6 @@
-#0x1B. Web stack debugging #4
-## 1. User Limit
+# Web Stack Debugging #4
 
-The `holberton` user was encountering "Too many open files" errors due to a low open file limit. This issue was resolved by:
-- Ensuring the `holberton` user exists on the system.
-- Increasing the open file limit for the `holberton` user to 65536 using Puppet.
+This project focuses on debugging and optimizing an Nginx web server to handle high traffic loads. The Puppet manifest provided adjusts the Nginx configuration to increase the number of worker connections and the maximum number of open files, ensuring the server can handle 1000 requests with 100 at a time.
+
+## Files
+- `0-the_sky_is_the_limit_not.pp`: Puppet manifest to adjust Nginx configuration.
